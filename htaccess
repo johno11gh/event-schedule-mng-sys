@@ -1,0 +1,25 @@
+#####wpcomment_nojpdeny#####
+SetEnvIf Request_URI ".*" WpCommentDeny
+#####end:wpcomment_nojpdeny#####
+# .php を省略する設定例
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^([^.]+)$ $1.php [NC,L]
+
+#ErrorDocument 503 /maintenance.html
+ 
+#<IfModule mod_rewrite.c>
+  #RewriteEngine On
+  #RewriteCond %{REQUEST_URI} !=/maintenance.html
+  #RewriteCond %{REMOTE_ADDR} !=xxx.xxx.xxx.xxx
+  #RewriteRule ^.*$ - [R=503,L]
+#</IfModule>
+ 
+#<IfModule mod_headers.c>
+  #Header set Retry-After "Wed, 31 Mar 2021 0:00:00 JST"
+#</IfModule>
+
+Options +ExecCGI
+AddType application/x-httpd-cgi .pl
+SetEnv PYTHONIOENCODING utf-8
+AddHandler cgi-script .py
