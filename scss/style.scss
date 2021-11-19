@@ -1,0 +1,546 @@
+@import '../css/reset.css';
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+//======================
+//変数定義
+//======================
+//フォントカラー
+$font-color_default: #000000 ;
+$color_corp: #000000;
+
+
+//フォントサイズ
+$font-size_s: 12px;
+$font-size_m: 14px;
+$font-size_default: 16px;
+$font-size_l: 18px;
+$font-size_xl: 24px;
+$font-size_xxl: 30px;
+$font-size_3l: 38px;
+
+//スペース
+$space_ss: 3px;
+$space_s: 5px;
+$space_m: 10px;
+$space_l: 15px;
+$space_xl: 20px;
+$space_xxl: 30px;
+$space_3l: 40px;
+
+$font-family_corp: 'Amatic SC', cursive;
+
+// =======================
+// base
+//========================
+html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  font-size: $font-size_default;
+  color: $font-color_default;
+  text-size-adjust: 100%;
+  letter-spacing: 0.1em;
+  box-sizing: border-box;
+}
+a{
+  color: $font-color_default;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover{
+  cursor: pointer;
+  text-decoration: none;
+  color: $font-color_default;
+}
+.container-fluid{
+  overflow: hidden;
+}
+.container{
+  margin: 0 auto;
+  overflow: hidden;
+  @include media-breakpoint-down(md){
+    padding-right: $space_s;
+    padding-left: $space_s;
+  }
+}
+
+.background{
+  &-header{
+    background-color: #ffb6c1;
+  }
+  &-footer{
+    background-color: #ffb6c1;
+  }
+}
+
+// =======================
+// header
+//========================
+.header{
+  box-sizing: border-box;
+  width: 100%;
+  //height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: $space_m;
+  padding-bottom: $space_m;
+  top: 0;
+  left: 0;
+  transition: .3s;
+  //position: fixed; //隠しておけばヘッダーの中身が内側に寄る
+  //overflow: hidden; //隠しておけばスマホレイアウトにてnavが全体表示になる
+  z-index: 2;
+  @include media-breakpoint-down(md){
+    padding-left: $space_m;
+    padding-right: $space_m;
+    position: fixed;
+  }
+  &-title{
+    font-size: $font_size_xxl;
+    font-weight: bold;
+    //line-height: 60px;
+    @include media-breakpoint-down(md){
+      font-size: $font-size_l;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+// ==================================
+// menu
+// ==================================
+@include media-breakpoint-down(md){//TODO:
+  .nav-menu{
+    display: block;
+    position: absolute;
+    overflow-y: scroll;
+    top: 0;
+    right: -80%;
+    background: rgba(255, 255,255, .98);
+    width: 80%;
+    height: 85vh;
+    padding-top: 50px;
+    transition: .5s;
+    z-index: 5;
+    &.active{
+      z-index: 5;
+      transition: .5s;
+      transform: translateX( -100%);
+    }
+  }
+}
+
+.menu{
+  display: flex;
+  align-items: center;
+  font-size: $font-size_m;
+  @include media-breakpoint-up(lg){
+    margin-top: $space_m;
+    margin-bottom: 0;
+  }
+  &-item{
+    margin-right: $space_xl;
+  }
+  &-link{
+    -webkit-font-smoothing: initial;
+  }
+  @include media-breakpoint-down(md){
+    display: block;
+    font-size: $font-size_xl;
+    &-item{
+      margin-right: initial;
+    }
+    &-link{
+      -webkit-font-smoothing: initial;
+      display: block;
+      padding: $space_l;
+      text-align: center;
+    }
+  }
+}
+
+
+// ==================================
+// menu-trigger
+// ==================================
+// https://www.nxworld.net/tips/12-css-hamburger-menu-active-effect.html
+.menu-trigger {
+  display: none;
+  @include media-breakpoint-down(md) {
+    display: inline-block;
+  }
+  transition: all .4s;
+  box-sizing: border-box;
+  position: relative;
+  width: 40px;
+  height: 32px;
+  z-index: 10;
+  span {
+    display: inline-block;
+    transition: all .4s;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: $font-color_default;
+    border-radius: 4px;
+    &:nth-of-type(1) {
+      top: 0;
+    }
+    &:nth-of-type(2) {
+      top: 14px;
+    }
+    &:nth-of-type(3) {
+      bottom: 0;
+    }
+  }
+  &.active span {
+    &:nth-of-type(1) {
+      transform: translateY(12px) rotate(-45deg);
+    }
+    &:nth-of-type(2) {
+      opacity: 0;
+    }
+    &:nth-of-type(3) {
+      transform: translateY(-16px) rotate(45deg);
+    }
+  }
+}
+
+// =======================
+// main
+//========================
+
+.maincontents{
+  margin-top: 40px;
+  margin-bottom: $space_3l;
+  @include media-breakpoint-down(md){
+    //overflow-x: hidden;
+    margin-top: 80px;
+    padding: $space_m;
+    overflow-y: scroll;
+  }
+}
+
+
+// schedule
+//=================================================
+// ブラウザ幅width
+$container_width: 1140px;
+$sidebar_width: 240px;
+$margin_width: $space_m; //sidebarマージンレフトと同じにする
+
+.page-2colum{
+  display: flex;
+  #main{
+    box-sizing: border-box;
+    width: calc(#{$container_width} - #{$sidebar_width} - #{$margin_width});
+    margin-right: auto;
+    margin-left: auto;
+    @include media-breakpoint-down(md){
+      width: 100%;
+    }
+  }
+  #sidebar{
+    box-sizing: border-box;
+    width: $sidebar_width;
+    margin-left: $space_m;
+    background-color: #ddd;
+    min-height: 500px;
+    box-sizing: border-box;
+    padding-right: $space_s;
+    padding-left: $space_s;
+    @include media_breakpoint_down(md){
+      display: none;
+    }
+    .twitter-tweet{
+      width: 100%;
+    }
+  }
+}
+.page-1colum{
+  #main{
+    width: 100%;
+  }
+  #sidebar{
+    display: none;
+  }
+}
+
+
+.month{
+  margin-bottom: $space_l;
+  overflow: hidden;
+  &-select{
+    cursor: pointer;
+    float: left;
+    padding: 0 $space_s;
+    font-size: $font-size_l;
+  }
+}
+
+.schedule{
+  box-sizing: border-box;
+  margin-bottom: $space_3l;
+  &-title{
+    font-size: $font-size_xl;
+    font-weight: bold;
+  }
+
+  &-bymonth{
+    display: none;
+    &.action{
+      display: block;
+    }
+  }
+
+// color border for type-valiation
+  &.battle{
+    table{
+      border: 1px solid #af0082;
+    }
+    thead{
+      background-color: #701f99;
+      tr{
+        color: #ffffff;
+      }
+    }
+    tbody tr{
+      border-bottom: 1px solid #af0082;
+      border-right: 1px solid #af0082;
+      &:last-child{
+        border: none;
+      }
+      &:nth-child(even){
+        background-color: #caa5e6;
+      }
+    }
+  }
+
+  &.challenge{
+    table{
+      border: 1px solid #ff8c1a;
+    }
+    thead{
+      background-color: #ff8c1a;
+      color: #ffffff;
+    }
+    tbody tr{
+      border-bottom: 1px solid #ff8c1a;
+      &:last-child{
+        border: none;
+      }
+      &:nth-child(even){
+        background-color: #ffb366;
+      }
+    }
+  }
+
+  &.normal{
+    table{
+      border: 1px solid #66b3ff;
+    }
+    thead{
+      color: #ffffff;
+      background: #4da6ff;
+      border: 1px solid #80bfff;
+    }
+    tbody tr{
+      border-bottom: 1px solid #66b3ff;
+      &:last-child{
+        border: none;
+      }
+      &:nth-child(even){
+        background: #b3ccff;
+      }
+    }
+  }
+
+  &.myPlan{
+    table{
+      border: 1px solid #7fffd4;
+    }
+    thead{
+      color: #ffffff;
+      background: #3cb371;
+      border: 1px solid #7fffd4;
+    }
+    tbody tr{
+      border-bottom: 1px solid #7fffd4;
+      &:last-child{
+        border: none;
+      }
+      &:nth-child(even){
+        background: #73e6bf;
+      }
+    }
+  }
+
+  &.myCancelPlan{
+    table{
+      border: 1px solid #dcdcdc;
+    }
+    thead{
+      color: #ffffff;
+      background: #808080;
+      border: 1px solid #dcdcdc;
+    }
+    tbody tr{
+      border-bottom: 1px solid #dcdcdc;
+      &:last-child{
+        border: none;
+      }
+      &:nth-child(even){
+        background: #d3d3d3;
+      }
+    }
+  }
+}
+
+// =======================
+// table
+//========================
+// schedule-table size
+//テーブル用変数定義
+$id_width: 55px;
+$date_width:106px;
+$time_width:49px;
+$block_width: 60px;
+table{
+  width: 100%;
+  box-sizing: border-box;
+  font-size: $font-size_m;
+  thead, tbody{
+    box-sizing: border-box;
+  }
+  th, td{
+    box-sizing: border-box;
+    padding-right: $space_ss;
+    padding-left: $space_ss;
+    text-align: center;
+    //border: 1px solid black; //あとで消す
+  }
+  .id{
+    width: $id_width;
+  }
+  .date{
+    //width: 14%;
+    width: $date_width;
+  }
+  .time{
+    //width: 5%;
+    width: $time_width;
+  }
+  .block{
+    //width: 5%;
+    width: $block_width;
+  }
+  .gather-title{
+    cursor: pointer;
+    width: calc((#{$container_width} - #{$sidebar_width} - #{$margin_width} -#{$date_width} - #{$time_width} - #{$block_width})*35%);
+  }
+  .tag{
+    width: calc((#{$container_width} - #{$sidebar_width} - #{$margin_width} -#{$date_width} - #{$time_width} - #{$block_width})*33%);
+  }
+  .organizer{
+    width: calc((#{$container_width} - #{$sidebar_width} - #{$margin_width} -#{$date_width} - #{$time_width} - #{$block_width})*11%);
+  }
+  .change{
+    width: 55px;
+  }
+  .delete{
+    width: 55px;
+  }
+  .ship{
+    width: 28px;
+  }
+  .normal{
+    /*.ship{
+      //width: 3%;
+      width: 22px;
+    }*/
+    .block{
+      //width: 6%;
+      width: 44px;
+    }
+    .organizer{
+      width: calc((810px -94px - 49px -49px)*7%);
+    }
+  }
+  @include media-breakpoint-down(sm){
+    //overflow-x: scroll;
+    //width: 285px;
+    tr{
+      //overflow-x: scroll;
+    }
+    .id, .time, .ship, .block, .tag, .organizer, .remarks, .change, .delete{
+      display: none;
+    }
+    .date{
+      width: 94px;
+    }
+    .gather-title{
+      width: 190px;
+    }
+  }
+}
+
+
+// =======================
+// regist
+//========================
+.section-form{
+  width: 600px;
+  margin: 0 auto;
+  padding: $space_l;
+  @include media-breakpoint-down(md){
+    width: 100%;
+  }
+}
+.label{
+  display: block;
+  width: 100%;
+  //margin: 0 auto;
+  @include media-breakpoint-down(md){
+    width: 100%;
+  }
+}
+textarea{
+  box-sizing: border-box;
+  //border: 1px solid #111;
+  width: 100%;
+}
+input[type="submit"]{
+  width: 150px;
+  padding: $space_l $space_xl;
+  border: none;
+  background: #dcdcdc;
+}
+.area-msg{
+  color: red;
+  margin-bottom: $space_l;
+}
+select{
+  &#ship{
+    width: 145px;
+  }
+  &#block{
+    width: 120px;
+  }
+}
+
+// =======================
+// footer
+//========================
+#footer{
+  width: 100%;
+  text-align: center;
+  font-size: $font_size_l;
+  height: 60px;
+  line-height: 60px;
+}
