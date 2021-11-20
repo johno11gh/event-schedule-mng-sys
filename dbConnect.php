@@ -1,7 +1,7 @@
 <?php
 function dbConnect(){
   //DBへの接続準備
-  $dsn = 'mysql:dbname=pso2gather; host=localhost; charset=utf8';//ローカル開発用
+  $dsn = 'mysql:dbname=; host=localhost; charset=utf8';//ローカル開発用
   $user = '****'; //ローカル開発
   $password = '****';//ローカル開発
   $options = array(
